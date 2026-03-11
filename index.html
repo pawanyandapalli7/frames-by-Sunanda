@@ -989,6 +989,42 @@
       width: 0%;
       transition: width 1.6s cubic-bezier(0.4,0,0.2,1);
     }
+    /* ─── Skeleton Loaders ─────────────────────────────── */
+    @keyframes shimmer {
+      0% { background-position: -600px 0; }
+      100% { background-position: 600px 0; }
+    }
+    .portfolio-skeleton {
+      break-inside: avoid;
+      margin-bottom: 1.5rem;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--charcoal-light) 25%, var(--charcoal-mid) 50%, var(--charcoal-light) 75%);
+      background-size: 600px 100%;
+      animation: shimmer 1.5s infinite linear;
+      min-height: 260px;
+    }
+    .portfolio-skeleton:nth-child(2) { min-height: 340px; }
+    .portfolio-skeleton:nth-child(3) { min-height: 220px; }
+    .portfolio-skeleton:nth-child(5) { min-height: 300px; }
+
+    /* ─── Drive Status Banner ─────────────────────────────── */
+    #drive-status {
+      position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+      background: var(--charcoal-mid);
+      border: 1px solid var(--gold-dim);
+      color: var(--white-muted);
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      padding: 0.6rem 1.4rem;
+      border-radius: 999px;
+      z-index: 200;
+      opacity: 0;
+      transition: opacity 0.4s;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    #drive-status.show { opacity: 1; }
   </style>
 </head>
 <body>
@@ -1035,11 +1071,12 @@
 
 <!-- ── HERO ─────────────────────────────── -->
 <section id="hero">
-  <div class="hero-slides">
-    <div class="hero-slide slide-1 active"></div>
-    <div class="hero-slide slide-2"></div>
-    <div class="hero-slide slide-3"></div>
-    <div class="hero-slide slide-4"></div>
+  <div class="hero-slides" id="heroSlides">
+    <!-- Fallback slides shown until Drive images load -->
+    <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1800&q=80')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?w=1800&q=80')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1800&q=80')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1476234251651-f353703a034d?w=1800&q=80')"></div>
   </div>
 
   <div class="hero-content">
@@ -1082,80 +1119,14 @@
       </div>
     </div>
 
-    <div class="portfolio-grid reveal">
-      <!-- Weddings -->
-      <div class="portfolio-item" data-category="weddings" data-title="Golden Vows" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80" alt="Wedding Photography" loading="lazy" />
-        <div class="portfolio-overlay">
-          <p class="portfolio-overlay-title">Golden Vows</p>
-          <p class="portfolio-overlay-cat">Weddings</p>
-        </div>
-        <div class="portfolio-expand">+</div>
-      </div>
-      <div class="portfolio-item" data-category="portraits" data-title="Soft Light" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=80" alt="Portrait Photography" loading="lazy" />
-        <div class="portfolio-overlay">
-          <p class="portfolio-overlay-title">Soft Light</p>
-          <p class="portfolio-overlay-cat">Portraits</p>
-        </div>
-        <div class="portfolio-expand">+</div>
-      </div>
-      <div class="portfolio-item" data-category="travel" data-title="Wandering Light" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1476234251651-f353703a034d?w=800&q=80" alt="Travel Photography" loading="lazy" />
-        <div class="portfolio-overlay">
-          <p class="portfolio-overlay-title">Wandering Light</p>
-          <p class="portfolio-overlay-cat">Travel</p>
-        </div>
-        <div class="portfolio-expand">+</div>
-      </div>
-      <div class="portfolio-item" data-category="lifestyle" data-title="Morning Ritual" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?w=800&q=80" alt="Lifestyle Photography" loading="lazy" />
-        <div class="portfolio-overlay">
-          <p class="portfolio-overlay-title">Morning Ritual</p>
-          <p class="portfolio-overlay-cat">Lifestyle</p>
-        </div>
-        <div class="portfolio-expand">+</div>
-      </div>
-      <div class="portfolio-item" data-category="weddings" data-title="Timeless Union" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?w=800&q=80" alt="Wedding Photography" loading="lazy" />
-        <div class="portfolio-overlay">
-          <p class="portfolio-overlay-title">Timeless Union</p>
-          <p class="portfolio-overlay-cat">Weddings</p>
-        </div>
-        <div class="portfolio-expand">+</div>
-      </div>
-      <div class="portfolio-item" data-category="portraits" data-title="Quiet Gaze" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1545665225-b23b99e4d45e?w=800&q=80" alt="Portrait Photography" loading="lazy" />
-        <div class="portfolio-overlay">
-          <p class="portfolio-overlay-title">Quiet Gaze</p>
-          <p class="portfolio-overlay-cat">Portraits</p>
-        </div>
-        <div class="portfolio-expand">+</div>
-      </div>
-      <div class="portfolio-item" data-category="travel" data-title="Dusk & Horizon" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&q=80" alt="Travel Photography" loading="lazy" />
-        <div class="portfolio-overlay">
-          <p class="portfolio-overlay-title">Dusk & Horizon</p>
-          <p class="portfolio-overlay-cat">Travel</p>
-        </div>
-        <div class="portfolio-expand">+</div>
-      </div>
-      <div class="portfolio-item" data-category="lifestyle" data-title="Ethereal Bloom" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?w=800&q=80" alt="Lifestyle Photography" loading="lazy" />
-        <div class="portfolio-overlay">
-          <p class="portfolio-overlay-title">Ethereal Bloom</p>
-          <p class="portfolio-overlay-cat">Lifestyle</p>
-        </div>
-        <div class="portfolio-expand">+</div>
-      </div>
-      <div class="portfolio-item" data-category="weddings" data-title="First Dance" onclick="openLightbox(this)">
-        <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&q=80" alt="Wedding Photography" loading="lazy" />
-        <div class="portfolio-overlay">
-          <p class="portfolio-overlay-title">First Dance</p>
-          <p class="portfolio-overlay-cat">Weddings</p>
-        </div>
-        <div class="portfolio-expand">+</div>
-      </div>
+    <div class="portfolio-grid reveal" id="portfolioGrid">
+      <!-- Skeleton loaders shown while Drive images load -->
+      <div class="portfolio-skeleton"></div>
+      <div class="portfolio-skeleton"></div>
+      <div class="portfolio-skeleton"></div>
+      <div class="portfolio-skeleton"></div>
+      <div class="portfolio-skeleton"></div>
+      <div class="portfolio-skeleton"></div>
     </div>
   </div>
 </section>
@@ -1165,7 +1136,7 @@
   <div class="container">
     <div class="about-grid">
       <div class="about-image-wrap reveal">
-        <img src="https://images.unsplash.com/photo-1554151228-14d9def656e4?w=800&q=80" alt="Sunanda Kommadi" loading="lazy" />
+        <img id="aboutImg" src="https://images.unsplash.com/photo-1554151228-14d9def656e4?w=800&q=80" alt="Sunanda Kommadi" loading="lazy" />
         <div class="about-image-accent"></div>
         <div class="about-years">
           <span class="about-years-num">8+</span>
@@ -1209,7 +1180,7 @@
 <section id="featured">
   <div class="featured-item">
     <div class="featured-img">
-      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80" alt="Wedding Feature" loading="lazy" />
+      <img id="featuredWeddingImg" src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80" alt="Wedding Feature" loading="lazy" />
     </div>
     <div class="featured-info reveal">
       <p class="featured-num">01</p>
@@ -1222,7 +1193,7 @@
 
   <div class="featured-item">
     <div class="featured-img">
-      <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1200&q=80" alt="Portrait Feature" loading="lazy" />
+      <img id="featuredPortraitImg" src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1200&q=80" alt="Portrait Feature" loading="lazy" />
     </div>
     <div class="featured-info reveal">
       <p class="featured-num">02</p>
@@ -1235,7 +1206,7 @@
 
   <div class="featured-item">
     <div class="featured-img">
-      <img src="https://images.unsplash.com/photo-1476234251651-f353703a034d?w=1200&q=80" alt="Travel Feature" loading="lazy" />
+      <img id="featuredTravelImg" src="https://images.unsplash.com/photo-1476234251651-f353703a034d?w=1200&q=80" alt="Travel Feature" loading="lazy" />
     </div>
     <div class="featured-info reveal">
       <p class="featured-num">03</p>
@@ -1402,6 +1373,9 @@
   <p class="lightbox-caption" id="lightbox-caption"></p>
 </div>
 
+<!-- Drive Status -->
+<div id="drive-status">⟳ Loading photos from Drive…</div>
+
 <script>
   // ── Preloader (timeout-based so slow images never block it)
   const bar = document.getElementById('preloaderBar');
@@ -1409,6 +1383,287 @@
   setTimeout(() => {
     document.getElementById('preloader').classList.add('done');
   }, 1800);
+
+  // ════════════════════════════════════════════════════════
+  //  GOOGLE DRIVE IMAGE LOADER
+  //  ─────────────────────────────────────────────────────
+  //  HOW TO SET UP (one-time, ~5 minutes):
+  //
+  //  1. Go to drive.google.com
+  //  2. Create these folders inside a parent folder:
+  //       📁 frames-portfolio/
+  //           📁 hero          ← 3–6 wide landscape photos for slideshow
+  //           📁 weddings      ← wedding photos for gallery
+  //           📁 portraits     ← portrait photos for gallery
+  //           📁 travel        ← travel photos for gallery
+  //           📁 lifestyle     ← lifestyle photos for gallery
+  //           📁 featured      ← 3 best photos (wedding, portrait, travel)
+  //           📁 about         ← 1 photo of you
+  //
+  //  3. Right-click each folder → Share → Anyone with the link → Viewer
+  //
+  //  4. Copy the folder ID from the URL:
+  //     drive.google.com/drive/folders/THIS_PART_IS_THE_ID
+  //
+  //  5. Paste each ID below replacing the placeholder text
+  //
+  //  DONE! Upload/delete photos in Drive → site updates automatically.
+  // ════════════════════════════════════════════════════════
+
+  const DRIVE_FOLDERS = {
+    hero:       'PASTE_HERO_FOLDER_ID_HERE',
+    weddings:   'PASTE_WEDDINGS_FOLDER_ID_HERE',
+    portraits:  'PASTE_PORTRAITS_FOLDER_ID_HERE',
+    travel:     'PASTE_TRAVEL_FOLDER_ID_HERE',
+    lifestyle:  'PASTE_LIFESTYLE_FOLDER_ID_HERE',
+    featured:   'PASTE_FEATURED_FOLDER_ID_HERE',
+    about:      'PASTE_ABOUT_FOLDER_ID_HERE',
+  };
+
+  // Converts a Drive file ID to a direct embeddable image URL
+  function driveImgUrl(fileId) {
+    return `https://lh3.googleusercontent.com/d/${fileId}`;
+  }
+
+  // Fetches image file IDs from a public Google Drive folder
+  // Uses the public RSS/export feed — no API key required
+  async function getDriveImages(folderId) {
+    if (!folderId || folderId.includes('PASTE_')) return [];
+    try {
+      // Google Drive public folder JSON export
+      const url = `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents+and+mimeType+contains+'image/'+and+trashed=false&fields=files(id,name)&orderBy=name&key=AIzaSyD-placeholder`;
+      // Fallback: use public folder page scraping via a CORS proxy isn't needed
+      // Instead we use the Google Drive sharing embed trick below
+      const embedUrl = `https://drive.google.com/embeddedfolderview?id=${folderId}#list`;
+      const res = await fetch(`https://drive.google.com/drive/folders/${folderId}`, {
+        headers: { 'Accept': 'application/json' }
+      });
+      // The cleanest no-auth approach: scrape the public folder page for file IDs
+      const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://drive.google.com/drive/folders/${folderId}`)}`;
+      const proxyRes = await fetch(proxyUrl);
+      const data = await proxyRes.json();
+      const html = data.contents;
+      // Extract file IDs from the page source
+      const matches = [...html.matchAll(/"(1[a-zA-Z0-9_-]{28,})"/g)];
+      const ids = [...new Set(matches.map(m => m[1]))].slice(0, 20);
+      return ids;
+    } catch (e) {
+      console.warn('Drive fetch failed for folder:', folderId, e);
+      return [];
+    }
+  }
+
+  // Build a portfolio card element
+  function makePortfolioItem(fileId, category, index) {
+    const catLabel = category.charAt(0).toUpperCase() + category.slice(1);
+    const titles = {
+      weddings:  ['Golden Vows','Timeless Union','First Dance','Eternal Embrace','Sacred Moment'],
+      portraits: ['Soft Light','Quiet Gaze','Inner Light','Still Moment','True Self'],
+      travel:    ['Wandering Light','Dusk & Horizon','Golden Hour','Lost in Wonder','Far & Wide'],
+      lifestyle: ['Morning Ritual','Ethereal Bloom','Golden Days','Simple Joy','Pure Life'],
+    };
+    const title = (titles[category] || ['Untitled'])[index % 5];
+    const div = document.createElement('div');
+    div.className = 'portfolio-item';
+    div.dataset.category = category;
+    div.dataset.title = title;
+    div.setAttribute('onclick', 'openLightbox(this)');
+    div.innerHTML = `
+      <img src="${driveImgUrl(fileId)}" alt="${catLabel} Photography" loading="lazy"
+           onerror="this.closest('.portfolio-item').remove()" />
+      <div class="portfolio-overlay">
+        <p class="portfolio-overlay-title">${title}</p>
+        <p class="portfolio-overlay-cat">${catLabel}</p>
+      </div>
+      <div class="portfolio-expand">+</div>`;
+    return div;
+  }
+
+  // Show/hide status banner
+  function showStatus(msg, duration = 2500) {
+    const el = document.getElementById('drive-status');
+    el.textContent = msg;
+    el.classList.add('show');
+    if (duration) setTimeout(() => el.classList.remove('show'), duration);
+  }
+
+  // ── Main loader
+  async function loadFromDrive() {
+    const configured = Object.values(DRIVE_FOLDERS).some(v => !v.includes('PASTE_'));
+    if (!configured) {
+      console.info('Drive folders not configured yet — using placeholder images.');
+      loadFallbackImages();
+      return;
+    }
+
+    showStatus('⟳ Loading photos from Drive…', 0);
+
+    // Load all folders in parallel
+    const [heroIds, weddingIds, portraitIds, travelIds, lifestyleIds, featuredIds, aboutIds] =
+      await Promise.all([
+        getDriveImages(DRIVE_FOLDERS.hero),
+        getDriveImages(DRIVE_FOLDERS.weddings),
+        getDriveImages(DRIVE_FOLDERS.portraits),
+        getDriveImages(DRIVE_FOLDERS.travel),
+        getDriveImages(DRIVE_FOLDERS.lifestyle),
+        getDriveImages(DRIVE_FOLDERS.featured),
+        getDriveImages(DRIVE_FOLDERS.about),
+      ]);
+
+    // ── Hero slideshow
+    if (heroIds.length > 0) {
+      const container = document.getElementById('heroSlides');
+      container.innerHTML = '';
+      heroIds.slice(0, 6).forEach((id, i) => {
+        const div = document.createElement('div');
+        div.className = 'hero-slide' + (i === 0 ? ' active' : '');
+        div.style.backgroundImage = `url('${driveImgUrl(id)}')`;
+        container.appendChild(div);
+      });
+      // Re-init slideshow with new slides
+      initSlideshow();
+    }
+
+    // ── Portfolio grid
+    const grid = document.getElementById('portfolioGrid');
+    grid.innerHTML = '';
+    const allPhotos = [
+      ...weddingIds.map((id, i) => ({ id, cat: 'weddings', i })),
+      ...portraitIds.map((id, i) => ({ id, cat: 'portraits', i })),
+      ...travelIds.map((id, i) => ({ id, cat: 'travel', i })),
+      ...lifestyleIds.map((id, i) => ({ id, cat: 'lifestyle', i })),
+    ];
+    // Interleave categories for visual variety
+    const interleaved = [];
+    const maxLen = Math.max(weddingIds.length, portraitIds.length, travelIds.length, lifestyleIds.length);
+    const cats = [
+      weddingIds.map((id, i) => ({ id, cat: 'weddings', i })),
+      portraitIds.map((id, i) => ({ id, cat: 'portraits', i })),
+      travelIds.map((id, i) => ({ id, cat: 'travel', i })),
+      lifestyleIds.map((id, i) => ({ id, cat: 'lifestyle', i })),
+    ];
+    for (let r = 0; r < maxLen; r++) {
+      cats.forEach(catArr => { if (catArr[r]) interleaved.push(catArr[r]); });
+    }
+    if (interleaved.length === 0) {
+      loadFallbackImages();
+    } else {
+      interleaved.forEach(({ id, cat, i }) => {
+        grid.appendChild(makePortfolioItem(id, cat, i));
+      });
+      // Re-attach filter listeners
+      initFilters();
+    }
+
+    // ── Featured section (use first image from each category folder)
+    if (featuredIds.length >= 1) document.getElementById('featuredWeddingImg').src  = driveImgUrl(featuredIds[0]);
+    if (featuredIds.length >= 2) document.getElementById('featuredPortraitImg').src = driveImgUrl(featuredIds[1]);
+    if (featuredIds.length >= 3) document.getElementById('featuredTravelImg').src   = driveImgUrl(featuredIds[2]);
+
+    // ── About photo
+    if (aboutIds.length > 0) {
+      document.getElementById('aboutImg').src = driveImgUrl(aboutIds[0]);
+    }
+
+    showStatus('✓ Photos updated from Drive', 2500);
+  }
+
+  // Fallback: keep Unsplash placeholders if Drive not configured
+  function loadFallbackImages() {
+    const fallbacks = {
+      weddings:  ['photo-1519741497674-611481863552','photo-1604017011826-d3b4c23f8914','photo-1465495976277-4387d4b0b4c6'],
+      portraits: ['photo-1531746020798-e6953c6e8e04','photo-1545665225-b23b99e4d45e'],
+      travel:    ['photo-1476234251651-f353703a034d','photo-1492691527719-9d1e07e534b4'],
+      lifestyle: ['photo-1499714608240-22fc6ad53fb2','photo-1552053831-71594a27632d'],
+    };
+    const grid = document.getElementById('portfolioGrid');
+    grid.innerHTML = '';
+    Object.entries(fallbacks).forEach(([cat, photos]) => {
+      photos.forEach((photo, i) => {
+        const div = document.createElement('div');
+        div.className = 'portfolio-item';
+        div.dataset.category = cat;
+        const catTitles = {
+          weddings:  ['Golden Vows','Timeless Union','First Dance'],
+          portraits: ['Soft Light','Quiet Gaze'],
+          travel:    ['Wandering Light','Dusk & Horizon'],
+          lifestyle: ['Morning Ritual','Ethereal Bloom'],
+        };
+        div.dataset.title = catTitles[cat][i];
+        div.setAttribute('onclick', 'openLightbox(this)');
+        const label = cat.charAt(0).toUpperCase() + cat.slice(1);
+        div.innerHTML = `
+          <img src="https://images.unsplash.com/${photo}?w=800&q=80" alt="${label}" loading="lazy" />
+          <div class="portfolio-overlay">
+            <p class="portfolio-overlay-title">${catTitles[cat][i]}</p>
+            <p class="portfolio-overlay-cat">${label}</p>
+          </div>
+          <div class="portfolio-expand">+</div>`;
+        grid.appendChild(div);
+      });
+    });
+    initFilters();
+  }
+
+  // ── Slideshow (extracted so it can be re-init after Drive loads)
+  let slideIndex = 0, slideTimer;
+  function initSlideshow() {
+    clearInterval(slideTimer);
+    const allSlides = document.querySelectorAll('.hero-slide');
+    const allDots   = document.querySelectorAll('.hero-dot');
+    // Sync dots count to slides
+    const dotsWrap = document.querySelector('.hero-dots');
+    if (dotsWrap) {
+      dotsWrap.innerHTML = '';
+      allSlides.forEach((_, i) => {
+        const d = document.createElement('div');
+        d.className = 'hero-dot' + (i === 0 ? ' active' : '');
+        d.dataset.slide = i;
+        d.addEventListener('click', () => goToSlide(i));
+        dotsWrap.appendChild(d);
+      });
+    }
+    slideIndex = 0;
+    function goToSlide(n) {
+      const slides = document.querySelectorAll('.hero-slide');
+      const dots   = document.querySelectorAll('.hero-dot');
+      slides[slideIndex]?.classList.remove('active');
+      dots[slideIndex]?.classList.remove('active');
+      slideIndex = n % slides.length;
+      slides[slideIndex]?.classList.add('active');
+      dots[slideIndex]?.classList.add('active');
+    }
+    slideTimer = setInterval(() => goToSlide(slideIndex + 1), 5500);
+  }
+
+  // ── Portfolio filter (extracted so re-usable after Drive loads)
+  function initFilters() {
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+          const match = filter === 'all' || item.dataset.category === filter;
+          item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+          item.style.opacity = '0';
+          item.style.transform = 'scale(0.96)';
+          setTimeout(() => {
+            item.style.display = match ? 'block' : 'none';
+            if (match) requestAnimationFrame(() => {
+              item.style.opacity = '1';
+              item.style.transform = 'scale(1)';
+            });
+          }, 250);
+        });
+      });
+    });
+  }
+
+  // Boot
+  initSlideshow();
+  loadFallbackImages(); // show instantly
+  loadFromDrive();      // then upgrade with Drive images if configured
 
   // ── Cursor
   const cursor = document.getElementById('cursor');
@@ -1442,20 +1697,6 @@
     navbar.classList.toggle('scrolled', window.scrollY > 60);
   });
 
-  // ── Hero slideshow
-  const slides = document.querySelectorAll('.hero-slide');
-  const dots = document.querySelectorAll('.hero-dot');
-  let current = 0;
-  function goToSlide(n) {
-    slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
-    current = n;
-    slides[current].classList.add('active');
-    dots[current].classList.add('active');
-  }
-  dots.forEach(d => d.addEventListener('click', () => goToSlide(+d.dataset.slide)));
-  setInterval(() => goToSlide((current + 1) % slides.length), 5500);
-
   // ── Reveal on scroll
   const revealEls = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
@@ -1475,32 +1716,6 @@
   setTimeout(() => {
     document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
   }, 3000);
-
-  // ── Portfolio filter
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const portfolioItems = document.querySelectorAll('.portfolio-item');
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      portfolioItems.forEach(item => {
-        const match = filter === 'all' || item.dataset.category === filter;
-        item.style.opacity = '0';
-        item.style.transform = 'scale(0.96)';
-        setTimeout(() => {
-          item.style.display = match ? 'block' : 'none';
-          if (match) {
-            requestAnimationFrame(() => {
-              item.style.opacity = '1';
-              item.style.transform = 'scale(1)';
-            });
-          }
-        }, 250);
-        item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-      });
-    });
-  });
 
   // ── Lightbox
   function openLightbox(el) {
